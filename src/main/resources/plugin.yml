@@ -1,0 +1,15 @@
+main: "jp.nagua.nGame.Main"
+name: "nGame"
+version: "${project.version}"
+api-version: 1.8
+author: MovingEmoji
+commands:
+  ping:
+    description: Show player ping
+    usage: /ping
+  location:
+    description: Save location to data
+    usage: /location [LocationName]
+  inventory:
+    description: Save common inventory set
+    usage: /inventory [load/save/delete] [InventoryName]

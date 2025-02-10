@@ -1,0 +1,10 @@
+jp\nagua\nGame\utils\DataHandler.class
+jp\nagua\nGame\commands\InventoryCommand.class
+jp\nagua\nGame\utils\InventoryHandler.class
+jp\nagua\nGame\utils\ClassHandler.class
+jp\nagua\nGame\elements\FixedLocation.class
+jp\nagua\nGame\elements\SerializedInventory.class
+jp\nagua\nGame\listener\EventListener.class
+jp\nagua\nGame\commands\LocationCommand.class
+jp\nagua\nGame\commands\PingCommand.class
+jp\nagua\nGame\Main.class
