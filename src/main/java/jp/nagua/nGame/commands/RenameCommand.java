@@ -25,7 +25,7 @@ public class RenameCommand implements CommandExecutor {
             StringBuilder stringBuilder = new StringBuilder();
             for(int i = 0; i < strings.length; i++) {
 
-                stringBuilder.append(strings[i].replace("&",));
+                stringBuilder.append(strings[i].replace("&", "§"));
                 if(i != strings.length - 1) {
                     stringBuilder.append(" ");
                 }
