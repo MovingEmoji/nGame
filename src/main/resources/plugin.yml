@@ -13,3 +13,7 @@ commands:
   inventory:
     description: Save common inventory set
     usage: /inventory [load/save/delete] [InventoryName]
+  rename:
+    description: Change your held item name
+    usage: /rename [Text]
+    permission: nGame.rename
