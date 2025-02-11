@@ -6,6 +6,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class RenameCommand implements CommandExecutor {
 
@@ -20,9 +22,20 @@ public class RenameCommand implements CommandExecutor {
                 commandSender.sendMessage(ChatColor.RED + "Please type Text");
                 return true;
             }
-            String name = strings[0].replace("&", "§");
-            ((Player) commandSender).getItemInHand().getItemMeta().setDisplayName(name);
-            commandSender.sendMessage(ChatColor.GREEN + "Change ItemName to " + name);
+            StringBuilder stringBuilder = new StringBuilder();
+            for(int i = 0; i < strings.length; i++) {
+
+                stringBuilder.append(strings[i].replace("&",));
+                if(i != strings.length - 1) {
+                    stringBuilder.append(" ");
+                }
+            }
+            ItemStack item = ((Player) commandSender).getItemInHand();
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(stringBuilder.toString());
+            item.setItemMeta(meta);
+            ((Player) commandSender).setItemInHand(item);
+            commandSender.sendMessage(ChatColor.GREEN + "Change ItemName to " + stringBuilder.toString());
             return true;
         }
         return false;
