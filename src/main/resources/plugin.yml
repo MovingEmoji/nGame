@@ -17,3 +17,6 @@ commands:
     description: Change your held item name
     usage: /rename [Text]
     permission: nGame.rename
+  kit:
+    description: Create or Edit kit
+    usage: /kit [create/list/delete] [Text] [Text]
