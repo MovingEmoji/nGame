@@ -3,15 +3,12 @@ package jp.nagua.nGame.commands;
 import jp.nagua.nGame.Main;
 import jp.nagua.nGame.elements.FixedLocation;
 import jp.nagua.nGame.utils.DataHandler;
-import net.minecraft.server.v1_8_R3.ServerPing;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.io.ByteArrayOutputStream;
 
 public class LocationCommand implements CommandExecutor {
 

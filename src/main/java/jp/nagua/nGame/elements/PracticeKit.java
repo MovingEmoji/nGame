@@ -1,6 +1,7 @@
 package jp.nagua.nGame.elements;
 
 import org.bukkit.Statistic;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.Serializable;
@@ -12,13 +13,15 @@ public class PracticeKit implements Serializable {
     private int map_type;
     private int round;
     private SerializedItem icon;
+    private SerializedInventory inventory;
 
-    public PracticeKit(String name, int flag, int map_type, int round, ItemStack icon) {
+    public PracticeKit(String name, int flag, int map_type, int round, ItemStack icon, Inventory inventory) {
         this.name = name;
         this.flag = flag;
         this.map_type = map_type;
         this.round = round;
         this.icon = new SerializedItem(icon);
+        this.inventory = new SerializedInventory(name, inventory);
     }
 
     public String getName() {
@@ -59,5 +62,18 @@ public class PracticeKit implements Serializable {
 
     public void setIcon(SerializedItem icon) {
         this.icon = icon;
+    }
+
+    public SerializedInventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(SerializedInventory inventory) {
+        this.inventory = inventory;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

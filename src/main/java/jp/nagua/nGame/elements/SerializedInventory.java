@@ -64,8 +64,8 @@ public class SerializedInventory implements Serializable {
             if(player.getInventory().getSize() < items.length) {
                 player.getInventory().setHelmet(items[i]);
                 player.getInventory().setChestplate(items[i + 1]);
-                player.getInventory().setChestplate(items[i + 2]);
-                player.getInventory().setChestplate(items[i + 3]);
+                player.getInventory().setLeggings(items[i + 2]);
+                player.getInventory().setBoots(items[i + 3]);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

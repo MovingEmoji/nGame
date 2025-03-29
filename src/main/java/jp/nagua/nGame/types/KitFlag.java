@@ -1,4 +1,4 @@
-package jp.nagua.nGame.elements;
+package jp.nagua.nGame.types;
 
 public class KitFlag {
     public static int NORMAL = 0;
@@ -30,4 +30,24 @@ public class KitFlag {
         }
     }
 
+    public static int getInteger(String type) {
+        switch (type) {
+            case "NORMAL":
+                return 0;
+            case "FASTHIT":
+                return 1;
+            case "SUMO":
+                return 2;
+            case "NODELAY":
+                return 3;
+            case "UHC":
+                return 4;
+            case "SUMODELAY":
+                return 5;
+            case "HALFDELAY":
+                return 6;
+            default:
+                return -1;
+        }
+    }
 }

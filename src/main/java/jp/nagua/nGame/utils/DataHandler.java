@@ -1,12 +1,15 @@
 package jp.nagua.nGame.utils;
 
 import jp.nagua.nGame.Main;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataHandler implements Serializable {
@@ -55,6 +58,16 @@ public class DataHandler implements Serializable {
 
     public static void deleteCommonDataFromDefault(String key) {
         Main.dataMap.remove(key);
+    }
+
+    public static List<Object> getContainsCommonDataFromDefault(String key) {
+        List<Object> list = new ArrayList<>();
+        for(Map.Entry<String, Object> entry : Main.dataMap.entrySet()) {
+            if(entry.getKey().contains(key)) {
+                list.add(entry.getValue());
+            }
+        }
+        return list;
     }
 
     public static void loadDefaultData() {
