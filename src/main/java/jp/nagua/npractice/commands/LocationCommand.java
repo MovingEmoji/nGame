@@ -2,7 +2,7 @@ package jp.nagua.npractice.commands;
 
 import jp.nagua.npractice.Main;
 import jp.nagua.npractice.elements.FixedLocation;
-import jp.nagua.npractice.utils.DataHandler;
+import jp.nagua.npractice.utils.handlers.DataHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -25,7 +25,7 @@ public class LocationCommand implements CommandExecutor {
             }
             Location location = ((Player) commandSender).getLocation();
             FixedLocation flocation = new FixedLocation(location);
-            DataHandler.putCommonDataToDefault(strings[0], flocation);
+            DataHandler.putCommonDataToDefault("Location-" + strings[0], flocation);
             commandSender.sendMessage(ChatColor.GREEN + "Save location at [x:" + (int) location.getX() + " y:" + (int) location.getY() + " z:" + (int) location.getZ() + "] to " + strings[0]);
             return true;
         }
