@@ -1,12 +1,12 @@
 package jp.nagua.npractice.commands;
 
 import jp.nagua.npractice.Main;
-import jp.nagua.npractice.elements.SerializedInventory;
-import jp.nagua.npractice.elements.SerializedItem;
+import jp.nagua.npractice.elements.serializes.SerializedInventory;
+import jp.nagua.npractice.elements.serializes.SerializedItem;
 import jp.nagua.npractice.types.KitFlag;
 import jp.nagua.npractice.types.MapType;
 import jp.nagua.npractice.elements.PracticeKit;
-import jp.nagua.npractice.utils.DataHandler;
+import jp.nagua.npractice.utils.handlers.DataHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -37,7 +37,6 @@ public class KitCommand implements CommandExecutor {
     static {
         Main.getPlugin().getCommand("kit").setExecutor(new KitCommand());
         Main.getPlugin().getCommand("kit").setTabCompleter((commandSender, command, s, strings) -> {
-            commandSender.sendMessage(strings.length + "");
             if(strings.length == 1) {
                 return ARGS;
             }
@@ -57,6 +56,7 @@ public class KitCommand implements CommandExecutor {
                         list.add(KitFlag.getString(i));
                         i ++;
                     }
+                    return list;
                 } else if(arg1.equals("setmaptype")) {
                     int i = 0;
                     List<String> list = new ArrayList<>();
@@ -64,6 +64,7 @@ public class KitCommand implements CommandExecutor {
                         list.add(MapType.getString(i));
                         i ++;
                     }
+                    return list;
                 }
             }
             return List.of();
@@ -86,6 +87,7 @@ public class KitCommand implements CommandExecutor {
                                 return true;
                             case "help":
                                 showHelp(commandSender);
+                                return true;
                             default:
                                 commandSender.sendMessage(ChatColor.RED + "Please type /kit help");
                                 return true;
@@ -196,6 +198,7 @@ public class KitCommand implements CommandExecutor {
         if(DataHandler.getCommonDataFromDefault("Kit-" + name) != null) {
             PracticeKit kit = (PracticeKit) DataHandler.getCommonDataFromDefault("Kit-" + name);
             kit.setIcon(new SerializedItem(((Player) commandSender).getItemInHand()));
+            commandSender.sendMessage(ChatColor.GREEN + "Load kit icon [" + name + "]");
         } else {
             commandSender.sendMessage(ChatColor.RED + "This kit does not exist");
         }
@@ -244,12 +247,15 @@ public class KitCommand implements CommandExecutor {
     }
 
     private static void showHelp(CommandSender commandSender) {
+        commandSender.sendMessage(ChatColor.GOLD + "KitCommands==========");
         commandSender.sendMessage(ChatColor.GREEN + "/kit help   " + ChatColor.GRAY + "Show this message");
+        commandSender.sendMessage(ChatColor.GREEN + "/kit list   " + ChatColor.GRAY + "Show kits list");
         commandSender.sendMessage(ChatColor.GREEN + "/kit create [KitName]   " + ChatColor.GRAY + "Create new kit");
         commandSender.sendMessage(ChatColor.GREEN + "/kit delete [KitName]   " + ChatColor.GRAY + "Delete kit");
-        commandSender.sendMessage(ChatColor.GREEN + "/kit list   " + ChatColor.GRAY + "Show kits list");
-        commandSender.sendMessage(ChatColor.GREEN + "/kit setflag   " + ChatColor.GRAY + "Set kit flag");
-        commandSender.sendMessage(ChatColor.GREEN + "/kit setmaptype   " + ChatColor.GRAY + "Set kit maptype");
-        commandSender.sendMessage(ChatColor.GREEN + "/kit setround   " + ChatColor.GRAY + "Set kit round");
+        commandSender.sendMessage(ChatColor.GREEN + "/kit setinventory [KitName]   " + ChatColor.GRAY + "Set kit inventory");
+        commandSender.sendMessage(ChatColor.GREEN + "/kit seticon [KitName]   " + ChatColor.GRAY + "Set kit icon");
+        commandSender.sendMessage(ChatColor.GREEN + "/kit setflag [KitName] [KitFlag]   " + ChatColor.GRAY + "Set kit flag");
+        commandSender.sendMessage(ChatColor.GREEN + "/kit setmaptype [KitName] [MapType]   " + ChatColor.GRAY + "Set kit maptype");
+        commandSender.sendMessage(ChatColor.GREEN + "/kit setround [KitName] [Round]   " + ChatColor.GRAY + "Set kit round");
     }
 }
