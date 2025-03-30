@@ -1,7 +1,7 @@
 package jp.nagua.npractice;
 
-import jp.nagua.npractice.utils.ClassHandler;
-import jp.nagua.npractice.utils.DataHandler;
+import jp.nagua.npractice.utils.handlers.ClassHandler;
+import jp.nagua.npractice.utils.handlers.DataHandler;
 import jp.nagua.npractice.listener.EventListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +20,7 @@ public class Main extends JavaPlugin {
         DataHandler.loadDefaultData();
         getServer().getPluginManager().registerEvents(new EventListener(), this);
         ClassHandler.loadClasses("jp.nagua.npractice.commands");
+        ClassHandler.loadClasses("jp.nagua.npractice.utils.managers");
 
     }
     @Override
