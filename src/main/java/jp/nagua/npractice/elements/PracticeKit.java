@@ -1,5 +1,7 @@
 package jp.nagua.npractice.elements;
 
+import jp.nagua.npractice.elements.serializes.SerializedInventory;
+import jp.nagua.npractice.elements.serializes.SerializedItem;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 

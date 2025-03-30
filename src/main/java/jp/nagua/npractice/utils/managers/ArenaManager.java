@@ -2,7 +2,7 @@ package jp.nagua.npractice.utils.managers;
 
 import jp.nagua.npractice.elements.Arena;
 import jp.nagua.npractice.types.MapType;
-import jp.nagua.npractice.utils.DataHandler;
+import jp.nagua.npractice.utils.handlers.DataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
