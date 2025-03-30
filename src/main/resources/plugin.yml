@@ -1,5 +1,5 @@
-main: "jp.nagua.nGame.Main"
-name: "nGame"
+main: "jp.nagua.npractice.Main"
+name: "nPractice"
 version: "${project.version}"
 api-version: 1.8
 author: MovingEmoji
@@ -19,4 +19,9 @@ commands:
     permission: nGame.rename
   kit:
     description: Create or Edit kit
-    usage: /kit [create/list/delete] [Text] [Text]
+    usage: /kit [create/delete/list] [Text] [Text]
+    permission: nGame.kit
+  arena:
+    description: Create or edit arena
+    usage: /arena [create/delete/list] [Text] [Text]
+    permission: nGame.arena
