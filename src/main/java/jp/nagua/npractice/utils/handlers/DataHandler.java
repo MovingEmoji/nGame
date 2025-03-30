@@ -1,4 +1,4 @@
-package jp.nagua.npractice.utils;
+package jp.nagua.npractice.utils.handlers;
 
 import jp.nagua.npractice.Main;
 import org.bukkit.Bukkit;

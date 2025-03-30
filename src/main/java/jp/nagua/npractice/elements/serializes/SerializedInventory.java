@@ -1,4 +1,4 @@
-package jp.nagua.npractice.elements;
+package jp.nagua.npractice.elements.serializes;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

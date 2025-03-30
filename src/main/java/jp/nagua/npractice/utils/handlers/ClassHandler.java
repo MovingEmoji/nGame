@@ -1,4 +1,4 @@
-package jp.nagua.npractice.utils;
+package jp.nagua.npractice.utils.handlers;
 
 import com.google.common.reflect.ClassPath;
 import jp.nagua.npractice.Main;
