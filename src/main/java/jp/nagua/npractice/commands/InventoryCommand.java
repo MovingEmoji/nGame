@@ -1,8 +1,8 @@
 package jp.nagua.npractice.commands;
 
 import jp.nagua.npractice.Main;
-import jp.nagua.npractice.elements.SerializedInventory;
-import jp.nagua.npractice.utils.DataHandler;
+import jp.nagua.npractice.elements.serializes.SerializedInventory;
+import jp.nagua.npractice.utils.handlers.DataHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,15 +25,15 @@ public class InventoryCommand implements CommandExecutor {
             if(strings.length >= 1) {
                 switch (strings[0]) {
                     case "load":
-                        SerializedInventory.loadInventory((Player) commandSender, (SerializedInventory) DataHandler.getCommonDataFromDefault(strings[1] + "Inventory"));
+                        SerializedInventory.loadInventory((Player) commandSender, (SerializedInventory) DataHandler.getCommonDataFromDefault("Inventory-" + strings[1]));
                         commandSender.sendMessage(ChatColor.GREEN + "Load inventory from " + strings[1]);
                         break;
                     case "save":
-                        DataHandler.putCommonDataToDefault(strings[1] + "Inventory", new SerializedInventory(strings[1], ((Player) commandSender).getInventory()));
+                        DataHandler.putCommonDataToDefault("Inventory-" + strings[1], new SerializedInventory(strings[1], ((Player) commandSender).getInventory()));
                         commandSender.sendMessage(ChatColor.GREEN + "Save inventory with " + strings[1]);
                         break;
                     case "delete":
-                        DataHandler.deleteCommonDataFromDefault(strings[1] + "Inventory");
+                        DataHandler.deleteCommonDataFromDefault("Inventory-" + strings[1]);
                         commandSender.sendMessage(ChatColor.RED + "Delete " + strings[1] + " inventory ");
                         break;
                     default:
