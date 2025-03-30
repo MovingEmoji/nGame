@@ -10,18 +10,24 @@ commands:
   location:
     description: Save location to data
     usage: /location [LocationName]
+    permission: nprac.location
   inventory:
     description: Save common inventory set
     usage: /inventory [load/save/delete] [InventoryName]
+    permission: nprac.inventory
   rename:
     description: Change your held item name
     usage: /rename [Text]
-    permission: nGame.rename
+    permission: nprac.rename
   kit:
     description: Create or Edit kit
     usage: /kit [create/delete/list] [Text] [Text]
-    permission: nGame.kit
+    permission: nprac.kit
   arena:
     description: Create or edit arena
     usage: /arena [create/delete/list] [Text] [Text]
-    permission: nGame.arena
+    permission: nprac.arena
+  trigger:
+    description: Set function trigger item
+    usage: /trigger [Text]
+    permission: nprac.trigger
