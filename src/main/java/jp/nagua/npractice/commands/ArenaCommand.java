@@ -3,6 +3,7 @@ package jp.nagua.npractice.commands;
 import jp.nagua.npractice.Main;
 import jp.nagua.npractice.elements.Arena;
 import jp.nagua.npractice.elements.FixedLocation;
+import jp.nagua.npractice.types.KitFlag;
 import jp.nagua.npractice.types.MapType;
 import jp.nagua.npractice.utils.managers.ArenaManager;
 import org.bukkit.Bukkit;
@@ -35,6 +36,31 @@ public class ArenaCommand implements CommandExecutor {
 
     static {
         Main.getPlugin().getCommand("arena").setExecutor(new ArenaCommand());
+        Main.getPlugin().getCommand("arena").setTabCompleter((commandSender, command, s, strings) -> {
+            if(strings.length == 1) {
+                return ARGS;
+            }
+            if(strings.length == 2) {
+                List<String> list = new ArrayList<>();
+                for(Arena arena : ArenaManager.getArenas()) {
+                    list.add(arena.toString());
+                }
+                return list;
+            }
+            if(strings.length == 3) {
+                String arg1 = strings[0];
+                if(arg1.equals("setmaptype")) {
+                    int i = 0;
+                    List<String> list = new ArrayList<>();
+                    while(!MapType.getString(i).equals("NOTFOUND")) {
+                        list.add(KitFlag.getString(i));
+                        i ++;
+                    }
+                    return list;
+                }
+            }
+            return List.of();
+        });
     }
 
     @Override
@@ -44,25 +70,31 @@ public class ArenaCommand implements CommandExecutor {
             return true;
         } else {
             String arg1 = strings[0];
-            if(ARGS.contains(arg1)) {
-            if(strings.length == 1) {
-                switch (arg1) {
-                    case "list":
-                        showArenas(commandSender);
-                        return true;
-                    default:
-                        commandSender.sendMessage(ChatColor.RED + ERR_HELP);
-                        return true;
-                }
-            } else if(strings.length == 2) {
+            if (ARGS.contains(arg1)) {
+                if(strings.length == 1) {
+                    switch (arg1) {
+                        case "list":
+                            showArenas(commandSender);
+                            return true;
+                        case "help":
+                            showHelp(commandSender);
+                            return true;
+                        default:
+                            commandSender.sendMessage(ChatColor.RED + ERR_HELP);
+                            return true;
+                    }
+                } else if(strings.length == 2) {
                     String arg2 = strings[1];
                     switch (arg1) {
                         case "create":
                             createDefaultArena(arg2, commandSender);
                             return true;
+                        case "delete":
+                            deleteArena(arg2, commandSender);
+                            return true;
                         case "teleport":
                             teleportToArena(arg2, commandSender);
-                            return  true;
+                            return true;
                         case "load":
                             loadArena(arg2, commandSender);
                             return true;
@@ -79,10 +111,22 @@ public class ArenaCommand implements CommandExecutor {
                             commandSender.sendMessage(ChatColor.RED + ERR_HELP);
                             return true;
                     }
+                } else if(strings.length == 3) {
+                    String arg2 = strings[1];
+                    String arg3 = strings[2];
+                    switch (arg1) {
+                        case "setmaptype":
+                            setMapType(arg2, arg3, commandSender);
+                            return true;
+                        default:
+                            commandSender.sendMessage(ChatColor.RED + ERR_HELP);
+                            return true;
+                    }
                 }
             }
+            commandSender.sendMessage(ChatColor.RED + ERR_HELP);
+            return true;
         }
-        return true;
     }
 
     private static void createDefaultArena(String name, CommandSender commandSender) {
@@ -90,6 +134,18 @@ public class ArenaCommand implements CommandExecutor {
             commandSender.sendMessage(ChatColor.GREEN + "Create arena [" + name + "]");
         } else {
             commandSender.sendMessage(ChatColor.RED + "This arena already exists");
+        }
+    }
+
+    private static void deleteArena(String name, CommandSender commandSender) {
+        if(ArenaManager.getArena(name) != null) {
+            if(Bukkit.getWorld(name) != null) {
+                Bukkit.unloadWorld(name, true);
+            }
+            ArenaManager.deleteArena(name);
+            commandSender.sendMessage(ChatColor.YELLOW + "Delete arena [" + name + "]");
+        } else {
+            commandSender.sendMessage(ChatColor.RED + "This arena does not exist");
         }
     }
 
@@ -175,5 +231,19 @@ public class ArenaCommand implements CommandExecutor {
         } else {
             commandSender.sendMessage(ChatColor.RED + "This arena does not exist");
         }
+    }
+
+    private static void showHelp(CommandSender commandSender) {
+        commandSender.sendMessage(ChatColor.GOLD + "ArenaCommands==========");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena help   " + ChatColor.GRAY + "Show this message");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena create [ArenaName]   " + ChatColor.GRAY + "Create new arena");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena delete [ArenaName]   " + ChatColor.GRAY + "Delete arena");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena list   " + ChatColor.GRAY + "Show arenas list");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena setspawn1 [ArenaName]   " + ChatColor.GRAY + "Set arena spawn1");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena setspawn2 [ArenaName]   " + ChatColor.GRAY + "Set arena spawn2");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena setmaptype [ArenaName] [MapType]   " + ChatColor.GRAY + "Set arena maptype");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena load [ArenaName]   " + ChatColor.GRAY + "Load arena");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena unload [ArenaName]   " + ChatColor.GRAY + "Unload arena");
+        commandSender.sendMessage(ChatColor.GREEN + "/arena teleport [ArenaName]   " + ChatColor.GRAY + "Teleport to arena");
     }
 }
