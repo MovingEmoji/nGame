@@ -7,6 +7,7 @@ import jp.nagua.npractice.types.KitFlag;
 import jp.nagua.npractice.types.MapType;
 import jp.nagua.npractice.elements.PracticeKit;
 import jp.nagua.npractice.utils.handlers.DataHandler;
+import jp.nagua.npractice.utils.managers.KitManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -160,10 +161,8 @@ public class KitCommand implements CommandExecutor {
     }
 
     private static void showKits(CommandSender commandSender) {
-        List<Object> kits = DataHandler.getContainsCommonDataFromDefault("Kit-");
         commandSender.sendMessage(ChatColor.GREEN + "Kits");
-        for(Object object : kits) {
-            PracticeKit kit = (PracticeKit) object;
+        for(PracticeKit kit : KitManager.getKits()) {
             commandSender.sendMessage(kit.getName());
         }
     }
@@ -253,6 +252,7 @@ public class KitCommand implements CommandExecutor {
         commandSender.sendMessage(ChatColor.GREEN + "/kit create [KitName]   " + ChatColor.GRAY + "Create new kit");
         commandSender.sendMessage(ChatColor.GREEN + "/kit delete [KitName]   " + ChatColor.GRAY + "Delete kit");
         commandSender.sendMessage(ChatColor.GREEN + "/kit setinventory [KitName]   " + ChatColor.GRAY + "Set kit inventory");
+        commandSender.sendMessage(ChatColor.GREEN + "/kit loadinventory [KitName]   " + ChatColor.GRAY + "Load kit inventory");
         commandSender.sendMessage(ChatColor.GREEN + "/kit seticon [KitName]   " + ChatColor.GRAY + "Set kit icon");
         commandSender.sendMessage(ChatColor.GREEN + "/kit setflag [KitName] [KitFlag]   " + ChatColor.GRAY + "Set kit flag");
         commandSender.sendMessage(ChatColor.GREEN + "/kit setmaptype [KitName] [MapType]   " + ChatColor.GRAY + "Set kit maptype");
