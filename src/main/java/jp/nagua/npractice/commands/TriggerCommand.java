@@ -20,7 +20,8 @@ public class TriggerCommand implements CommandExecutor {
 
     private static final ArrayList<String> ARGS = new ArrayList<>(Arrays.asList(
             "OpenUnRankedQueue",
-            "OpenRankedQueue"
+            "OpenRankedQueue",
+            "LeaveQueue"
     ));
 
     static {
