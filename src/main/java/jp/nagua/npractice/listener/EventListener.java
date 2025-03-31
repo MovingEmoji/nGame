@@ -23,9 +23,14 @@ public class EventListener implements Listener {
     public void onRightClick(PlayerInteractEvent event) {
         if(!event.getPlayer().getItemInHand().getType().equals(Material.AIR)) {
             if(event.getPlayer().getItemInHand().equals(((SerializedItem) DataHandler.getCommonDataFromDefault("Trigger-OpenUnRankedQueue")).getItemStack())) {
+                event.setCancelled(true);
                 GUIManager.openUnRankedQueue(event.getPlayer());
             } else if(event.getPlayer().getItemInHand().equals(((SerializedItem) DataHandler.getCommonDataFromDefault("Trigger-OpenRankedQueue")).getItemStack())) {
+                event.setCancelled(true);
                 GUIManager.openRankedQueue(event.getPlayer());
+            } else if(event.getPlayer().getItemInHand().equals(((SerializedItem) DataHandler.getCommonDataFromDefault("Trigger-LeaveQueue")).getItemStack())) {
+                event.setCancelled(true);
+                PlayerManager.leaveQueue(event.getPlayer());
             }
         }
     }
